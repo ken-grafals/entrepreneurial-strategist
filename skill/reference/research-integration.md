@@ -1,3 +1,5 @@
+<!-- v0.3.0: required persistence for Perplexity calls + sharpened model-selection decision tree per retrospective 2026-04-22 (rec 9). -->
+
 # Research Integration
 
 Loaded when you are initiating external research or consuming research the founder has dropped into the project. Research matters in this MVP for two jobs: **market sizing** and **competitive / alternatives analysis**. Other research is welcome but secondary.
@@ -17,6 +19,12 @@ At the start of a research task, check whether `mcp__perplexity__perplexity_ask`
 ### Model selection (the key decision)
 
 Pick the model that matches the task's depth. Default to the cheapest model that will actually answer the question — do not route every query through `sonar-deep-research`.
+
+**Decision tree:**
+
+- Is the question **factual** (counts, sizes, named players, recent news)? → `sonar-pro`. (Use `sonar` for a single fact check.)
+- Is the question **analytical** (read the landscape, compare 2–3 options, synthesize sources)? → `sonar-reasoning-pro`.
+- Is the question a **full investigation** that the agent can't reason through alone (market sizing with methodology, regulatory scan, deep competitive map)? → **confirm with the founder first** (cost + latency), then `sonar-deep-research`.
 
 | Model | Use for | Latency | Rough cost / call |
 |---|---|---|---|
@@ -58,11 +66,15 @@ MCP-server specifics vary. Point the user at Perplexity's official MCP documenta
 
 If they want to call the API directly without MCP, it is OpenAI-compatible — set `base_url` to `https://api.perplexity.ai` and use any OpenAI SDK with their Perplexity key.
 
-### Caching
+### Persistence (required, not optional)
 
-Cache significant Perplexity responses to `research/cache/<topic>-<YYYY-MM-DD>.md` so the founder has a local record they can re-read. "Significant" = responses used as evidence in a vertical analysis or comparison, and **always** for `sonar-deep-research` outputs regardless of whether you immediately integrate them (they are too expensive to re-run). One-off `sonar` sanity checks don't need caching.
+**Every Perplexity call's output is persisted** to `research/results/perplexity-<topic>-<YYYY-MM-DD>.md` with the exact query at the top. This is load-bearing for resumability: if the session compacts, the research is still on disk; if the agent is reasoning through a comparison and needs to re-check a cited stat, the file is there. Transcript-only research is lost research.
 
-At the top of each cached file include:
+This applies to **all** Perplexity models — including cheap `sonar` sanity checks. The cost of writing one file per call is trivial; the cost of re-running a lost `sonar-deep-research` call is $0.50–$1.00+ and 2–5 minutes.
+
+Persistence location is **`research/results/`** for Perplexity-MCP outputs (not `research/cache/`). Treat MCP-originated research the same as founder-dropped external research — both are primary research material that later phases depend on. `research/cache/` remains reserved for Path 3 (native web search) outputs.
+
+At the top of each persisted file include:
 
 ```
 **Provider:** perplexity
@@ -73,7 +85,7 @@ At the top of each cached file include:
 **Cost / usage:** <from the response `usage` block, if available>
 ```
 
-Then the stripped report body, followed by the citations list. `research/cache/` is provider-agnostic and holds outputs from Path 1 and Path 3 both.
+Then the stripped report body (strip the `<think>...</think>` block first for deep-research outputs), followed by the citations list.
 
 ### Error handling
 
@@ -121,7 +133,7 @@ If neither Perplexity MCP nor an external deep-research tool is available, fall 
 
 ### Logging
 
-Save significant native-search outputs into `research/cache/<topic>-<YYYY-MM-DD>.md` with a `**Provider:** native-web-search` stamp at the top, along with the search query and the sources you read. `research/results/` is reserved for research the founder dropped in from external tools — keeping cache and founder-sourced results in separate directories preserves provenance.
+Save significant native-search outputs into `research/cache/<topic>-<YYYY-MM-DD>.md` with a `**Provider:** native-web-search` stamp at the top, along with the search query and the sources you read. `research/cache/` is reserved for Path 3 native-search outputs; `research/results/` holds founder-dropped external research (Path 2) and MCP-originated Perplexity calls (Path 1). Separate directories preserve provenance at a glance.
 
 ---
 

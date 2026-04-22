@@ -1,3 +1,5 @@
+<!-- v0.3.0: parallel cash-wedge SKU as first-class concept for runway-constrained founders per retrospective 2026-04-22 (rec 4). -->
+
 # Beachhead Recommendation
 
 Loaded when you are converging on a recommended beachhead and producing the final two artifacts of the MVP: `recommendations/beachhead-recommendation.md` and `recommendations/wedge-product-concept.md`.
@@ -68,6 +70,34 @@ Separate from the red-team pass on the recommendation. This pass asks:
 - Does the price range match the buyer's budget authority?
 
 Append to the file, log to `decisions/red-team-log.md`.
+
+### Parallel cash-wedge SKUs
+
+Runway-constrained founders may need **two SKUs from day one**, not one: a **primary wedge** that produces the high-quality beachhead pull-through (slow but strategic) **and** a **cash wedge** that produces bridge revenue from the founder's warm network (fast but tactical). Most real beachheads have an asymmetry between "best long-term ICP" and "fastest-to-cash ICP"; forcing the founder to pick one loses runway or loses strategy.
+
+**Trigger.** Add a parallel cash-wedge SKU to the recommendation when **either** condition holds:
+
+- **Runway < 6 months** as stated in `intake/constraints-and-goals.md`.
+- **Founder signals** they need bridge revenue — e.g., they've said "I can't wait 9 months for enterprise procurement to close," or they've named a warm contact who would buy a scoped service "tomorrow."
+
+Do not add a cash wedge by default; it is asymmetry-driven, not runway-safe-by-default.
+
+**Structure.** When both SKUs are warranted, the wedge-product-concept file carries **two wedge blocks**, not one:
+
+- **Primary wedge** — the minimum viable product/service that converts the named beachhead end-user. Slow sales motion is acceptable if the price/LTV math works.
+- **Cash wedge (parallel)** — a smaller, faster-sold SKU drawn from the founder's warm network. Typically: a productized version of expertise the founder already has, sold to a known buyer within 30 days. Named explicitly as a cash vehicle, not as beachhead-relevant.
+
+Each block carries the same subsections (form factor, capabilities, scope fences, channels, price hypothesis, first-10 acquisition hypothesis). The header notes whether the file is `primary-only` or `primary + cash`.
+
+**Sequencing.** Name which SKU the founder starts in week one. Typically: cash wedge first (revenue immediately, network-sold, low-risk), primary wedge in parallel (prospecting begins week one but doesn't close for 60–180 days). The cash wedge must not consume more than ~50% of the founder's execution time, or it becomes the venture by accident.
+
+**Red-team adjustment.** The wedge red-team runs on **both** blocks separately. Cash-wedge-specific red-team questions:
+
+- Is the cash wedge actually network-sold, or does it require cold outbound the founder claims to refuse?
+- Does the cash wedge drift toward the beachhead's ICP (warning sign of scope collapse) or stay genuinely orthogonal (intended)?
+- Will delivering the cash wedge eat enough time that the primary wedge starves?
+
+If the cash wedge fails red-team, ship primary-only and flag the runway constraint as an open primary-research question for the founder.
 
 ---
 

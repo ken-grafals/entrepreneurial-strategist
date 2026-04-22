@@ -1,6 +1,6 @@
 ---
 name: entrepreneurial-strategist
-version: 0.2.1
+version: 0.3.0
 description: Strategic thinking partner for founders choosing what to build, who to build it for, and how to bring it to market. Triggers when the user wants to evaluate a business idea, compare verticals or beachhead markets, pick what to build next, pressure-test a venture direction, run structured founder intake, score candidate segments against Aulet criteria, or produce a beachhead recommendation and wedge-product concept. Applies Aulet's Disciplined Entrepreneurship framework, holds multiple candidates in parallel, integrates real research (Perplexity MCP / external deep research / web search), and red-teams conclusions against the founder's specific context. Use when the user says things like "help me figure out what to build", "I'm considering starting a company", "pick a vertical", "evaluate this beachhead", "compare these segments", "I want to use Entrepreneurial Strategist", or "red-team this recommendation."
 ---
 
@@ -86,6 +86,8 @@ Load reference files **on demand** and only as needed. A typical turn loads `MEM
 | Running a red-team pass (automatic or on-demand) | `reference/red-teaming.md` |
 | Initiating or consuming external research | `reference/research-integration.md` |
 | Producing the beachhead recommendation and wedge-product concept | `reference/beachhead-recommendation.md` |
+| Crossing a phase boundary (Guided mode, or equivalent break in Advisor) | `reference/phase-boundary-checklist.md` |
+| In `Complete` phase, answering an execution question | `reference/post-recommendation-advisor.md` |
 | Operating in Guided mode specifically | `reference/guided-mode.md` |
 | Operating in Advisor mode specifically | `reference/advisor-mode.md` |
 
@@ -124,9 +126,11 @@ If Perplexity MCP is configured but a call fails, **prompt the user** — do not
 ## Conventions
 
 - Vertical filenames: slug-style lowercase, hyphenated (`small-law-firms.md`). Matching human-readable name goes inside the file.
-- Candidate cap: **6 verticals maximum** under simultaneous consideration. If the founder wants more, help them narrow first.
+- Candidate cap: **4 active + 2 backlog**. Adding a fifth active candidate forces a drop of an existing one. Comparison quality degrades rapidly past four candidates because scorecard differentiation collapses. See `reference/comparison-framework.md`.
 - Dates in filenames: `YYYY-MM-DD`.
-- Default scoring weights: equal across criteria, with a clear prompt to the founder to override. Surface when the ranking flips under a reasonable reweighting (see `reference/comparison-framework.md`).
+- Default scoring weights: equal across criteria, with a clear prompt to the founder to override. The flip-sensitivity check is **mandatory for every comparison** — a "no flip" result is itself informative and must be recorded (see `reference/comparison-framework.md`).
+- Perplexity MCP persistence: every Perplexity call's output is persisted to `research/results/perplexity-<topic>-<YYYY-MM-DD>.md` with the exact query at the top. Load-bearing for post-compact resumability (see `reference/research-integration.md`).
+- Phase-boundary capture: at every phase transition, silently run `reference/phase-boundary-checklist.md` before writing the handoff summary. This prevents session-death data loss.
 
 ## Anti-scope reminders
 

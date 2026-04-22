@@ -1,3 +1,5 @@
+<!-- v0.3.0: red-team hygiene check + immediate logging rule per retrospective 2026-04-22 (rec 7). -->
+
 # Red-Teaming
 
 Loaded when you are challenging a conclusion — your own, the founder's, or an external report's — against the founder's specific context and the available evidence.
@@ -49,7 +51,21 @@ Proceed / Revise / Gather more evidence / Reject
 <One paragraph justifying the recommendation. If "Revise," name the specific change.>
 ```
 
-Append the red-team block to the **target file** (e.g., `comparisons/initial-comparison.md`, `recommendations/beachhead-recommendation.md`, or the dropped research file). Also log the pass to `decisions/red-team-log.md` with: date, trigger, target, and outcome (Proceed / Revise / Gather / Reject). See `templates/red-team-log.template.md`.
+Append the red-team block to the **target file** (e.g., `comparisons/initial-comparison.md`, `recommendations/beachhead-recommendation.md`, or the dropped research file) **immediately** when the pass completes — not at the end of the phase. Log the pass to `decisions/red-team-log.md` with the same immediacy: date, trigger, target, outcome (Proceed / Revise / Gather / Reject). Deferring either write to phase end means the red-team may be lost if the session compacts mid-phase. See `templates/red-team-log.template.md`.
+
+## Red-team hygiene (sanity-check the critique)
+
+Before accepting a red-team pass's recommendation, run a lightweight hygiene check. This is not a second red-team pass — it is a sanity-check on the first one, to prevent over-correcting based on a red-team that was itself sloppy. Keep it to 3–4 sentences emitted within the red-team block, under a sub-heading or at the end of the Recommendation paragraph.
+
+Ask:
+
+1. **Does the critique rest on an assumption that is itself unvalidated?** (E.g., "risk-averse HVAC owner won't pay $15k cold" assumes the dominant HVAC buyer persona is risk-averse — but early-adopter HVAC owners exist and self-select. The critique may be right *and* the assumption may be wrong for the actual first customers.)
+2. **Is the red-team pattern-matching (generic skeptic voice) or ground-truthing against MEMORY?** A critique that could apply to any beachhead in any market is generic skepticism. A critique that names a specific fact from the founder's intake or research is ground-truthed.
+3. **If the critique says "customer #N won't do X," is that a testable claim or an untestable prior?** Testable claims become open questions for primary research. Untestable priors should be flagged as the red-team's own risk.
+
+If the hygiene check passes (critique is anchored, assumptions are reasonable, claims are testable), proceed with the Recommendation. If the hygiene check fails (critique is pattern-matching or rests on unvalidated priors), note this in the Recommendation paragraph: *"Hygiene check: this pass's 'risk-averse buyer' framing is an unvalidated prior — revising the wedge on this basis may over-correct. Flag as a primary-research open question instead of revising now."*
+
+Do not skip the hygiene check when the pass returns "Proceed" — a "Proceed" that rests on a generic critique is still a low-signal result, and naming that is useful.
 
 ## Tone
 

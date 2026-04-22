@@ -1,6 +1,6 @@
 # Idea Exploration
 
-Loaded when the founder is articulating what they're considering, or when they've arrived without a specific idea and need candidates generated. The goal of this phase is to produce a **short list of 3–6 candidate verticals/segments** worth analyzing in depth.
+Loaded when the founder is articulating what they're considering, or when they've arrived without a specific idea and need candidates generated. The goal of this phase is to produce a **short list of 3–4 active candidate verticals/segments (plus up to 2 backlog)** worth analyzing in depth. See `reference/comparison-framework.md` for the 4+2 cap rationale.
 
 ## Three entry patterns
 
@@ -42,12 +42,12 @@ The founder has done their own candidate generation.
 1. Accept their list as the starting point. Do not second-guess.
 2. Ask how they arrived at each one. Note any that seem to be on the list for sentimental reasons (a past project, a friend's recommendation) rather than strategic ones — flag later in red-teaming, not now.
 3. Ask whether there are candidates they considered and rejected. Note the rejections; if a rejected candidate would have been stronger than one on the list, surface it.
-4. If the list has **more than 6 candidates**, ask the founder to narrow to their top 6 before analysis. Six is the ceiling.
+4. If the list has **more than 4 active candidates**, ask the founder to narrow to their top 4 before analysis. The remaining candidates move to a backlog (up to 2). Four active is the ceiling; adding a fifth forces a drop. See `reference/comparison-framework.md`.
 5. If the list has only one candidate, you're actually in Pattern A — route there.
 
 ## Writing the candidate list
 
-Once you have 3–6 candidates:
+Once you have 3–4 active candidates (plus up to 2 backlog):
 
 1. For each, create a stub `verticals/<slug-name>.md` file. Use the template at `templates/vertical-analysis.template.md`. Populate only the header and the one-line description — leave the analysis sections empty.
 2. In `MEMORY.md`, update the `Active Verticals Under Consideration` list with the slugs and one-liners.

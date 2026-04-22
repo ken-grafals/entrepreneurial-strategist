@@ -1,6 +1,10 @@
+<!-- v0.3.0: intake reframed as producing a living constraints file; added constraint-eliciting prompts per retrospective 2026-04-22 (rec 5). -->
+
 # Intake Flow
 
-Loaded when you are conducting founder intake for the first time, or updating the founder profile during a later session. Intake is not a one-time event — context is refreshed and extended continuously.
+Loaded when you are conducting founder intake for the first time, or updating the founder profile during a later session. Intake is a **living document, not a phase you leave**. Every subsequent phase (Idea Exploration, Vertical Analysis, Comparison, Recommendation, Wedge) is expected to update — not just read — `intake/constraints-and-goals.md` when new founder constraints emerge.
+
+Constraints commonly surface after formal intake is "done": a delivery-stack rule emerges during Idea Exploration when the founder rejects a candidate; a geography-is-a-bonus-not-a-wedge rule emerges during Comparison when scoring over-weights a soft advantage. These are founder constraints, not transient preferences — capture them.
 
 ## Purpose
 
@@ -39,6 +43,8 @@ Cover the following five areas. In Guided mode, move through them in this order.
 - Time commitment: full-time, part-time, evenings-and-weekends?
 - Geographic constraints: customers you must or cannot serve; travel limits; timezone realities.
 - Other commitments: existing job, family responsibilities, non-compete or IP restrictions.
+- **Delivery-stack exclusions:** are there platforms, stacks, or vendor dependencies you've decided you will **not** build on — even if the market demands it? Why? (This catches rules like "must run on own stack, not third-party enterprise platforms" that otherwise surface mid-comparison and invalidate candidates.)
+- **Bonus-not-load-bearing advantages:** are there founder attributes (language fluency, geography, industry credential) that you consider *bonuses* rather than *load-bearing* for a wedge? Name them. (This catches over-weighting in scoring — e.g., Spanish-language capability as a credential, not a wedge.)
 
 ### 4. Goals and values
 - What does success look like in 2 years? In 5?
@@ -88,6 +94,16 @@ When you learn new context in a later session:
 - Update the relevant intake file in place. Do not lose prior content; if a detail is superseded, preserve the original in a `## Superseded notes` subsection at the bottom.
 - Update the `MEMORY.md` Founder Profile if the change is significant enough to affect future analysis.
 - Log the update in the session log.
+
+## Constraints that emerge after intake
+
+When a constraint emerges in a later phase (Idea Exploration, Vertical Analysis, Comparison, etc.), it is as load-bearing as an intake-elicited constraint — and is often more surprising, because it had to be triggered by a specific candidate or scoring decision. When this happens:
+
+1. **Update `intake/constraints-and-goals.md`** with the new constraint, dated. Use the "Delivery-stack exclusions" or "Bonus-not-load-bearing segments" sub-section if it fits one; otherwise add a new bullet under Constraints with a dated note.
+2. **Write a `decisions/decision-log.md` entry** immediately (not at phase end), explaining when and why the constraint emerged. Example: *"2026-04-22 — Own-stack constraint. Surfaced when Claude proposed a conversational-ai-platform-partner candidate; founder rejected on grounds that the venture must run on own stack. Reversal condition: the own-stack rule is relaxed if …"*
+3. **Update `MEMORY.md`** Founder Profile § Constraints (or add a dedicated `§ Strategic constraints` block if multiple constraints accumulate), and write an auto-memory of type `feedback` with **Why:** and **How to apply:** lines per the user's private memory conventions.
+
+Do not wait for the current phase to end to do any of the above. Constraints that live only in the transcript get lost when the session compacts.
 
 ## Red flags during intake
 

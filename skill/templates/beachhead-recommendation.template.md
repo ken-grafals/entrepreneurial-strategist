@@ -51,6 +51,20 @@
 
 <!-- Specific, falsifiable conditions. If the founder discovers any of these in primary research, they should return and re-evaluate. -->
 
+## Parallel cash-wedge SKU (optional)
+
+<!-- Populate only if runway < 6 months OR founder signals need for bridge revenue.
+     If not warranted, delete this entire section. Do not ship an empty "no cash wedge needed" placeholder.
+     See skill/reference/beachhead-recommendation.md § Parallel cash-wedge SKUs. -->
+
+- **Cash-wedge title:** {{CASH_WEDGE_TITLE}}
+- **One-sentence description:** {{CASH_WEDGE_DESCRIPTION}}
+- **Runway math that justifies inclusion:** {{CASH_WEDGE_RUNWAY_MATH}} <!-- e.g., "4 months runway; primary wedge sales cycle 120 days; cash wedge closes warm contact in 30 days and covers 60 days of expenses at $X" -->
+- **Orthogonality to primary beachhead:** {{CASH_WEDGE_ORTHOGONAL}} <!-- Explicitly name why this SKU will not drag the venture toward the wrong ICP -->
+- **Time allocation:** {{CASH_WEDGE_TIME_ALLOCATION}} <!-- <= ~50% of founder's week, or the cash wedge becomes the venture -->
+
+Full wedge block for this SKU lives in `recommendations/wedge-product-concept.md` § "Cash wedge (parallel)".
+
 ## Red-Team Pass
 
 <!-- Appended by the automatic red-team pass. Must show a "Proceed" or acted-upon "Revise" before this file is considered done. -->

@@ -12,6 +12,22 @@
 - **Other commitments:** {{OTHER_COMMITMENTS}}
 - **Non-compete or IP restrictions:** {{LEGAL_CONSTRAINTS}}
 
+## Delivery-stack exclusions
+
+<!-- Platforms, stacks, or vendor dependencies the founder has decided they will not build on, even if the market demands it.
+     Update in place when new exclusions surface in later phases. Add a dated note in brackets: [added YYYY-MM-DD post-intake]. -->
+
+- {{STACK_EXCLUSION_1}}
+- {{STACK_EXCLUSION_2}}
+
+## Bonus-not-load-bearing segments
+
+<!-- Founder attributes (language fluency, geography, industry credential, etc.) that are bonuses, not load-bearing, for a wedge.
+     Prevents over-weighting in scoring. Update when the founder clarifies one of these during comparison. -->
+
+- {{BONUS_SEGMENT_1}}
+- {{BONUS_SEGMENT_2}}
+
 ## Goals
 
 - **2-year success:** {{TWO_YEAR}}

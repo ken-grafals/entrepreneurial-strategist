@@ -1,3 +1,5 @@
+<!-- v0.3.0: added compact checkpoints, post-compact rehydration, resume protocol, and phase-boundary hook per retrospective 2026-04-22 (recs 1, 2, 3). -->
+
 # Guided Mode
 
 Loaded when the founder is operating in Guided mode (set at project init or via `/mode guided`). This file describes the canonical sequence. The founder is always free to skip, revisit, or switch to Advisor mode; the skill remembers what has been covered and never makes the founder redo work.
@@ -19,7 +21,7 @@ Each step has an entry condition, an output, and a handoff to the next step. Eac
 **MEMORY phase:** `Idea Exploration`
 **Entry:** Intake is sufficient (per `reference/intake-flow.md`).
 **Reference:** `reference/idea-exploration.md`.
-**Output:** A candidate list of 3–6 verticals in `MEMORY.md` under Active Verticals Under Consideration; stub files at `verticals/<slug>.md`.
+**Output:** A candidate list of 3–4 active verticals (plus up to 2 backlog) in `MEMORY.md` under Active Verticals Under Consideration; stub files at `verticals/<slug>.md`.
 **Handoff:** Offer to move to vertical analysis. Explain briefly what that will produce per candidate.
 
 ### 3. Vertical analysis
@@ -65,9 +67,49 @@ Each step has an entry condition, an output, and a handoff to the next step. Eac
 
 ## Between-step behavior
 
-- Always update `MEMORY.md` before ending a session (even mid-step).
-- Every session appends a single Session Log entry; see `reference/memory-format.md`.
+- **At every phase transition, run `reference/phase-boundary-checklist.md` silently before writing the handoff summary.** This is the load-bearing hook that prevents session-death data loss — it captures founder facts, feedback, and domain structure into auto-memory, drafts the in-progress session-log entry, and forces immediate (not end-of-phase) decision-log and red-team-log writes.
+- Always update `MEMORY.md` `### Phase substate` (working buffer) after every material action within a phase — scoring a vertical, writing a red-team, persisting a research call. Update `### Last reliable checkpoint` only at phase boundaries. See `reference/memory-format.md` for the three-layer Active Project State.
+- Every session appends a single Session Log entry; see `reference/memory-format.md`. During the session, draft into `### Session in progress`.
 - If the founder pauses mid-step, leave the phase label at the step they're in — do not prematurely advance.
+
+## Compact checkpoints
+
+`/compact` frees working context by summarizing the transcript. The summary is imperfect — it is load-bearing only when material state has already been written to files. Recommend compact **only** at the natural checkpoints named below, never between them.
+
+Natural compact checkpoints in a Guided run:
+
+1. **After intake is complete** — `intake/founder-profile.md`, `intake/constraints-and-goals.md`, and `MEMORY.md` Founder Profile are all written.
+2. **After all vertical analyses are complete** — every `verticals/*.md` has non-`RESEARCH-PENDING` scores on all 8 Aulet dimensions.
+3. **After the comparison file is written with the red-team appended** — `comparisons/initial-comparison.md` includes scoring matrix, weighted totals, flip-sensitivity, narrative read, and Red-Team Pass.
+4. **(Optional) After the beachhead recommendation ships but before the wedge** — only if context feels heavy.
+
+At each checkpoint, surface a single line to the founder: *"We just crossed a natural checkpoint. All state is persisted. If you want to free context, this is a safe place to `/compact` — resumption will work from `MEMORY.md` and the artifacts."*
+
+**Explicitly do not recommend `/compact` between checkpoints**, regardless of how long the transcript has grown. Mid-phase state lives in the transcript; compacting would summarize it imperfectly and lose in-flight reasoning (e.g., a red-team insight that hasn't been written down yet).
+
+## Post-compact rehydration
+
+Immediately after `/compact` fires (detectable because the conversation has been replaced by a compact summary), **before responding to the founder**:
+
+1. Re-read `MEMORY.md` completely — Founder Profile, Active Project State (all three layers), Session in progress scratch.
+2. Re-read the last-modified artifact in the project (the file the founder and you were actively working on — latest `verticals/*.md`, the comparison, a recommendation draft).
+3. Re-read the current phase's primary reference file (e.g., `reference/comparison-framework.md` if in Comparison).
+4. Give the founder a one-sentence "I just re-hydrated from MEMORY and the artifacts — here's where we are: [state]." This gives them a chance to correct a bad summary before you act on it.
+
+The post-compact summary is imperfect. Assume it missed something and verify against files on disk.
+
+## Resume protocol (new-session pick-up)
+
+On session start (per SKILL.md "Returning to an existing project folder"), after reading `MEMORY.md`:
+
+1. Check whether `### Phase substate` has content beyond `### Last reliable checkpoint`. If yes, the previous session ended mid-phase — run the pick-up routine:
+   - Read the substate block fully.
+   - Read the target file named in the substate (e.g., "Scoring verticals/hvac.md, 5 of 8 dimensions done" → open `verticals/hvac.md`).
+   - Read the current phase's primary reference file.
+   - Tell the founder in one–two sentences what you've re-hydrated: *"Previous session ended with 3 of 5 vertical analyses complete; `verticals/voice-mid-market.md` has urgency scored but not ability-to-pay. Picking up from there."*
+   - Proceed.
+2. Check whether `### Session in progress` has a draft session-log entry. If yes (and if the draft's date is prior to today or its Session N is the number of the previous session), the previous session died before promoting the scratch — promote it to the Session Log now, clear the scratch, and mention the promotion to the founder.
+3. If neither condition holds, state is clean — proceed with the normal "Current phase / Active Verticals / Active Open Questions" summary.
 
 ## Skipping and revisiting
 
@@ -95,7 +137,8 @@ Run this checklist before declaring any step's output "done" and advancing the M
 - [ ] For comparison, recommendation, and wedge artifacts: a `## Red-Team Pass` block is present, and its Recommendation is `Proceed` — or a `Revise` that has been acted on (with the follow-up recorded in the same file).
 - [ ] Scores in the comparison include the arithmetic (weighted totals and flip-sensitivity) per `reference/comparison-framework.md`, not just the rank.
 - [ ] `MEMORY.md` `Current phase` matches the canonical enum and reflects the step's phase label.
-- [ ] Session-log entry is composed at the end of the session (not mid-session) and summarizes files touched.
+- [ ] Session-log entry is composed at the end of the session (not mid-session) and summarizes files touched. (During the session, the scratch draft in `### Session in progress` is the source.)
+- [ ] `decisions/decision-log.md` and `decisions/red-team-log.md` entries were written immediately after their triggering decisions/passes, not deferred to phase end (per `reference/phase-boundary-checklist.md`).
 - [ ] Filenames use slug-style (lowercase, hyphenated, `YYYY-MM-DD` where dated).
 
 ## What Guided mode does NOT do

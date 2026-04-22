@@ -1,3 +1,5 @@
+<!-- v0.3.0: three-layer Active Project State + Session in progress scratch + immediate decision/red-team log rule per retrospective 2026-04-22 (recs 1, 2). -->
+
 # MEMORY.md format and update rules
 
 Loaded when you are creating or updating `MEMORY.md` in the founder's project folder. `MEMORY.md` is the single most important file the skill maintains — it is loaded at the start of every session and is the founder's persistent context.
@@ -17,13 +19,19 @@ See `templates/MEMORY.template.md` for the canonical skeleton.
    - Goals and Values (success criteria, risk tolerance, timeline, values)
    - Network and Resources
 
-2. **Active Project State** — structured, rewritten every session.
-   - Current mode: `Guided` or `Advisor`
-   - Current phase: one of the seven canonical values — `Intake`, `Idea Exploration`, `Vertical Analysis`, `Comparison`, `Recommendation`, `Wedge`, or `Complete`. No other values are permitted. `Complete` covers post-wedge work (including continued Advisor-mode exploration); there is no `Post-Recommendation`.
-   - Active verticals under consideration (one-liner + link to file each)
-   - Active open questions (not yet resolved)
+2. **Active Project State** — structured, with three layers to support session resumability. Updated continuously during the session (substate) and at phase boundaries (checkpoint).
+   - **Current mode:** `Guided` or `Advisor`.
+   - **Current phase:** one of the seven canonical values — `Intake`, `Idea Exploration`, `Vertical Analysis`, `Comparison`, `Recommendation`, `Wedge`, or `Complete`. No other values are permitted. `Complete` covers post-wedge work (including continued Advisor-mode exploration); there is no `Post-Recommendation`.
+   - **Phase substate** — free-form bullets describing mid-phase progress. Written-through after every material action (e.g., "scored urgency on `verticals/hvac.md`"; "wrote red-team pass on `comparisons/initial-comparison.md`"; "persisted `research/results/perplexity-hvac-tam-2026-04-28.md`"). This is the working buffer. If the session dies mid-phase, this block is how the next session re-hydrates.
+   - **Last reliable checkpoint** — updated only at phase boundaries. States the last point at which state is known-good. Format: `<phase-just-completed> @ <YYYY-MM-DD>` + one line summarizing what's durable. The resume protocol (see `reference/guided-mode.md`) resumes from here if `Phase substate` is empty or stale.
+   - **Active verticals under consideration** — one-liner + link per candidate.
+   - **Active open questions** — not yet resolved.
 
-3. **Session Log** — append-only, chronological. Entry format:
+3. **Session in progress** (scratch) — between Active Project State and Session Log. This is the draft session-log entry, updated at every phase boundary per `reference/phase-boundary-checklist.md`. On clean session end, promote to the Session Log and clear the scratch. On session death, the scratch IS the record — the next session promotes it during the resume protocol.
+
+   Format: the same `### YYYY-MM-DD — Session N` header and 3–6 bullets that a final Session Log entry would have.
+
+4. **Session Log** — append-only, chronological. Entry format:
 
    ```
    ### YYYY-MM-DD — Session N
@@ -52,11 +60,15 @@ See `templates/MEMORY.template.md` for the canonical skeleton.
 
 ## When to update
 
-- **At the end of every working session**, append a session log entry. If the founder leaves mid-turn, update the log at the next natural pause.
+- **After every material action within a phase** (scored a vertical on a dimension, wrote a red-team block, persisted a research call, made a mid-phase strategic decision), update `### Phase substate` immediately. This is the write-through buffer that protects against session death.
+- **At every phase boundary** (Intake → Idea Exploration, Idea Exploration → Vertical Analysis, etc.), update `### Last reliable checkpoint` with the phase that just completed and a one-line summary of what's durable. At the same boundary, run `reference/phase-boundary-checklist.md` and draft/update the `### Session in progress` scratch entry.
+- **Immediately after any non-trivial decision** (constraint surfaces mid-phase, weight re-negotiated with the founder, candidate added or dropped), write a `decisions/decision-log.md` entry — do not wait for phase end.
+- **Immediately after any red-team pass completes** (automatic or on-demand), write a `decisions/red-team-log.md` entry alongside appending the Red-Team Pass block to the target file — do not wait for phase end.
+- **At the end of every working session**, promote `### Session in progress` to the Session Log as a final entry, and clear the scratch. If the founder leaves mid-turn, the scratch is the record; the next session handles promotion.
 - **Whenever founder context changes** (they share a new constraint, their timeline shifts, a new team member arrives), update the structured Founder Profile section.
-- **Whenever the phase changes** (intake → idea exploration → vertical analysis, etc.), update the Active Project State `Current phase` line.
+- **Whenever the phase changes** (intake → idea exploration → vertical analysis, etc.), update the Active Project State `Current phase` line AND `### Last reliable checkpoint`.
 - **Whenever a vertical is added, dropped, or renamed**, update the Active Verticals list.
-- **Whenever a question is resolved**, move it from Active Open Questions to the Session Log entry for that session with a note on the resolution.
+- **Whenever a question is resolved**, move it from Active Open Questions to the `### Session in progress` scratch with a note on the resolution.
 
 ## When the log gets long
 
