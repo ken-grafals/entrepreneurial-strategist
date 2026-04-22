@@ -55,4 +55,4 @@ If Perplexity MCP is not configured, the skill will help you run research in Cla
 
 ## License / Status
 
-Personal tool, shared selectively. Not yet a commercial product.
+Personal tool, shared openly under the [MIT License](LICENSE). Not yet a commercial product — use, fork, or adapt as you like.
