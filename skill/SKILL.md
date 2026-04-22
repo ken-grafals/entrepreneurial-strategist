@@ -1,6 +1,6 @@
 ---
 name: entrepreneurial-strategist
-version: 0.2.0
+version: 0.2.1
 description: Strategic thinking partner for founders choosing what to build, who to build it for, and how to bring it to market. Triggers when the user wants to evaluate a business idea, compare verticals or beachhead markets, pick what to build next, pressure-test a venture direction, run structured founder intake, score candidate segments against Aulet criteria, or produce a beachhead recommendation and wedge-product concept. Applies Aulet's Disciplined Entrepreneurship framework, holds multiple candidates in parallel, integrates real research (Perplexity MCP / external deep research / web search), and red-teams conclusions against the founder's specific context. Use when the user says things like "help me figure out what to build", "I'm considering starting a company", "pick a vertical", "evaluate this beachhead", "compare these segments", "I want to use Entrepreneurial Strategist", or "red-team this recommendation."
 ---
 
@@ -115,7 +115,7 @@ Maximum one automatic pass per decision point to avoid noise. On-demand passes (
 ## Research routing (summary; see `reference/research-integration.md`)
 
 Priority order:
-1. **Perplexity MCP** if the user has the `perplexity` MCP server configured. Check for the tool at turn start; pick the right Perplexity model (Sonar / Sonar Pro / Sonar Deep Research) based on depth.
+1. **Perplexity MCP** if the user has a `perplexity` MCP server configured (typically exposing `mcp__perplexity__perplexity_ask`). Check for the tool at turn start; pick the Perplexity model by depth — `sonar` / `sonar-pro` for quick factual work, `sonar-reasoning-pro` for analysis, `sonar-deep-research` for full autonomous research (slow + expensive — confirm with the founder before calling).
 2. **External file drop** otherwise. Write a research prompt to `research/prompts/<topic>-<YYYY-MM-DD>.md` and ask the founder to run it in Claude.ai deep research, ChatGPT deep research, or the Perplexity web app and drop the markdown result into `research/results/`.
 3. **Native web search** as a last resort. Flag the output as limited depth.
 

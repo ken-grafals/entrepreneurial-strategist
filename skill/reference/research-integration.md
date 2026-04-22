@@ -8,42 +8,76 @@ Three paths, in priority order.
 
 ## Path 1: Perplexity MCP (preferred)
 
-If the user has the official `@perplexity-ai/mcp-server` configured, use it directly.
+If the user has a Perplexity MCP server configured, use it directly. The common server surface is a single tool — `mcp__perplexity__perplexity_ask` — which is a thin wrapper over Perplexity's OpenAI-compatible `/chat/completions` endpoint. You select depth by choosing the **model** inside the request, not by choosing between different tools.
 
 ### Detection
 
-At the start of a research task, check whether any of the four Perplexity MCP tools are available:
+At the start of a research task, check whether `mcp__perplexity__perplexity_ask` (or any `mcp__perplexity__*` tool) is available. If yes, use Path 1. If no, move to Path 2.
 
-| Tool | Purpose | Perplexity model |
-|---|---|---|
-| `mcp__perplexity__search` | Quick market scan, single fact-check, short competitor list | **Sonar** |
-| `mcp__perplexity__ask` | Targeted factual question with citations | **Sonar** |
-| `mcp__perplexity__reason` | Multi-step reasoning / competitive landscape with analysis | **Sonar Pro** |
-| `mcp__perplexity__research` | Full market sizing, regulatory scan, deep-research equivalent | **Sonar Deep Research** |
+### Model selection (the key decision)
 
-If at least one is present, use Path 1. Pick the tool whose purpose matches the research task's depth — don't route every query through `research` (cost and latency) or every query through `search` (insufficient depth for sizing work). If no Perplexity tools are present, move to Path 2.
+Pick the model that matches the task's depth. Default to the cheapest model that will actually answer the question — do not route every query through `sonar-deep-research`.
+
+| Model | Use for | Latency | Rough cost / call |
+|---|---|---|---|
+| `sonar` | Single fact-check, quick competitor list, recent news scan | seconds | cents |
+| `sonar-pro` | Multi-source synthesis, targeted factual question with citations | seconds | cents |
+| `sonar-reasoning-pro` | Competitive landscape analysis, multi-step reasoning with web search (CoT + Pro search, no multi-minute research mode) | ~10–30s | low tens of cents |
+| `sonar-deep-research` | Full market sizing, regulatory scan, deep-research equivalent — autonomously runs dozens of searches and synthesizes a long-form report | **2–5 minutes** | **$0.50–$1.00+** per call |
+
+Prefer `sonar-reasoning-pro` when you need analysis but not a multi-minute autonomous research run. Reserve `sonar-deep-research` for the handful of decision-critical questions per project where deep synthesis genuinely changes the recommendation (e.g., vertical market sizing, regulatory landscape for a regulated segment).
+
+### Deep research — `sonar-deep-research` specifics
+
+This is the API equivalent of Perplexity's Research (formerly Deep Research) mode. Request shape via `perplexity_ask`:
+
+```json
+{
+  "messages": [
+    {"role": "user", "content": "<research question — be specific and scoped>"}
+  ],
+  "model": "sonar-deep-research",
+  "reasoning_effort": "high"
+}
+```
+
+Notes on the knobs and response:
+
+- **`reasoning_effort`** — `low` | `medium` (default) | `high`. Directly controls how many reasoning tokens are burned and how deep it goes. Use `low` for a quicker sweep, `high` for the full pro-style deep dive. Pricing on `sonar-deep-research` is multi-dimensional (input $2/M, output $8/M, citation $2/M, reasoning $3/M, search queries $5/1k) — a single `high`-effort query can easily hit $0.50–$1.00+.
+- **Latency** — expect 2–5 minutes per call. MCP/HTTP timeouts on the user's side may fire before the response arrives. If a deep-research call times out or errors, **surface it to the founder** rather than retrying blindly — retrying is expensive.
+- **Response shape** — the assistant `content` starts with a `<think>...</think>` block containing the reasoning plan, followed by the final markdown report. **Strip the `<think>` block** before presenting or caching the content; keep only the report. The response also includes a `citations` array (URLs) and a `search_results` array (title/url/snippet per source) alongside `usage` with the full token/cost breakdown.
+- **Before calling** — confirm with the founder that a deep-research call is warranted for this specific question. One sentence: *"This will take 2–5 minutes and cost roughly $0.50–$1 — proceed?"* Do not run deep research silently.
+
+### Prompt quality for Perplexity calls
+
+The prompt-quality guidance in the "Prompt quality matters" section below applies equally to MCP calls as to file-drop prompts. A vague prompt to `sonar-deep-research` burns real money for generic output — scope the question, state the founder's context in 2–4 sentences, ask for citations, forbid strategic advice.
 
 ### Installation (if the user asks how)
 
-Guide them to run:
+MCP-server specifics vary. Point the user at Perplexity's official MCP documentation and tell them it will need their `PERPLEXITY_API_KEY`. Do **not** run install commands for them — MCP config modifications and API-key handling are theirs.
 
-```
-claude mcp add perplexity --env PERPLEXITY_API_KEY="<their-key>" -- npx -y @perplexity-ai/mcp-server
-```
-
-Then restart Claude Code. Do **not** run this command for them — it modifies MCP config and requires the user's API key.
-
-### Model selection
-
-Model selection is implicit in the tool choice above — each tool is bound to a Perplexity model by the MCP server (`search`/`ask` → Sonar, `reason` → Sonar Pro, `research` → Sonar Deep Research). If a newer version of the server exposes model choice as an explicit parameter, use the corresponding model; otherwise rely on the tool-to-model mapping and note any limitation in the output.
+If they want to call the API directly without MCP, it is OpenAI-compatible — set `base_url` to `https://api.perplexity.ai` and use any OpenAI SDK with their Perplexity key.
 
 ### Caching
 
-Cache significant Perplexity responses to `research/cache/<topic>-<YYYY-MM-DD>.md` so the founder has a local record they can re-read. "Significant" = responses used as evidence in a vertical analysis or comparison. One-off sanity checks don't need caching. Include a `**Provider:** perplexity (<tool name>)` line at the top of each cached file so the source is traceable — `research/cache/` is provider-agnostic and holds outputs from Path 1 and Path 3 both.
+Cache significant Perplexity responses to `research/cache/<topic>-<YYYY-MM-DD>.md` so the founder has a local record they can re-read. "Significant" = responses used as evidence in a vertical analysis or comparison, and **always** for `sonar-deep-research` outputs regardless of whether you immediately integrate them (they are too expensive to re-run). One-off `sonar` sanity checks don't need caching.
+
+At the top of each cached file include:
+
+```
+**Provider:** perplexity
+**Model:** <sonar | sonar-pro | sonar-reasoning-pro | sonar-deep-research>
+**Reasoning effort:** <low | medium | high>   (deep-research only)
+**Date:** YYYY-MM-DD
+**Prompt:** <the exact user message sent>
+**Cost / usage:** <from the response `usage` block, if available>
+```
+
+Then the stripped report body, followed by the citations list. `research/cache/` is provider-agnostic and holds outputs from Path 1 and Path 3 both.
 
 ### Error handling
 
-If a Perplexity call fails (network, auth, rate limit): **surface the error to the founder and offer the options** — retry, fall back to Path 2 (file-drop), fall back to Path 3 (native web search with a depth caveat). Do not silently degrade — the founder needs to know what they're getting.
+If a Perplexity call fails (network, auth, rate limit, timeout): **surface the error to the founder and offer the options** — retry (cheap models only; confirm before retrying deep research), fall back to Path 2 (file-drop), fall back to Path 3 (native web search with a depth caveat). Do not silently degrade — the founder needs to know what they're getting.
 
 ---
 
