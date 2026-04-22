@@ -22,6 +22,8 @@ Two modes, equal in standing:
 Clone this repo and symlink (or copy) the `skill/` directory into your Claude Code skills folder:
 
 ```bash
+git clone https://github.com/ken-grafals/entrepreneurial-strategist.git
+cd entrepreneurial-strategist
 ln -s "$(pwd)/skill" ~/.claude/skills/entrepreneurial-strategist
 ```
 
