@@ -68,3 +68,18 @@ Full wedge block for this SKU lives in `recommendations/wedge-product-concept.md
 ## Red-Team Pass
 
 <!-- Appended by the automatic red-team pass. Must show a "Proceed" or acted-upon "Revise" before this file is considered done. -->
+
+## Post-ship addenda
+
+<!-- Append-only. Do NOT edit the body of this file once shipped. New signal lands here as a dated block.
+     Each addendum must cite its originating signal (call notes path, research file, email thread, etc.).
+     See skill/reference/beachhead-recommendation.md § "Append-only discipline".
+
+     Format:
+
+### YYYY-MM-DD — <Channel | Pain | Competitive | Reversal-condition | ...> update
+- **Signal source:** <path or link to the call notes, research file, email, etc.>
+- **What moved:** <which claim(s) in the body above this addendum is affected>
+- **Hypothesis impact:** <which H<N> in MEMORY.md / intake/active-hypotheses.md shifted, and in which direction>
+- **Response:** <noted / awaiting more signal / decision-log entry at decisions/decision-log.md>
+-->

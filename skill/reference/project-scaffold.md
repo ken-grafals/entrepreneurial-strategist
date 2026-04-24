@@ -33,6 +33,11 @@ When the founder approves, create exactly this structure inside their chosen pro
 
 `.gitkeep` is an empty file that keeps empty directories tracked if the founder version-controls the folder.
 
+Two additional files in `intake/` are created on demand, not at scaffold time, and only when first needed:
+
+- `intake/project-facts.md` — venture-specific facts (market shape, seasonality, competitive notes) that should live with the project rather than in Claude auto-memory. See `reference/memory-routing.md`.
+- `intake/active-hypotheses.md` — full-form store for the load-bearing falsifiable claims mirrored into the `### Active Hypotheses` block of `MEMORY.md`. Created at Recommendation phase. See `reference/memory-format.md`.
+
 ## Preview-and-approve flow
 
 Before writing anything:

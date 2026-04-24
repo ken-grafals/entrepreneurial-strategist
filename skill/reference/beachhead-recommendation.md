@@ -39,6 +39,17 @@ Before considering the recommendation "done":
 3. If the pass returns "Revise" or "Reject," act on it — revise the recommendation or flag it as unready. Do not ship a recommendation with an unresolved red-team output saying "Revise."
 4. If the pass returns "Proceed" or "Gather more evidence," the recommendation is ready; the evidence-gathering items feed into the Open Questions section.
 
+### Append-only discipline (these two files are append-only once shipped)
+
+Both `recommendations/beachhead-recommendation.md` and `recommendations/wedge-product-concept.md` follow the same discipline as `decisions/decision-log.md`: never rewrite the body once the file has shipped (red-team passed and handed off to the founder). Strategic evolution happens in dated addenda, not in silent body edits.
+
+- **New field signal that touches the recommendation** — append a dated block under `## Post-ship addenda` at the bottom of `beachhead-recommendation.md`. Name the update type ("Channel update — 2026-MM-DD", "Pain update", "Competitive update", "Reversal-condition update"). Do **not** edit the original Recommendation / Why / Runners-up / Reversal sections.
+- **New field signal that changes the wedge** — same pattern at the bottom of `wedge-product-concept.md`. If the wedge's shape changes outright (not just a parameter), write a new dated version block that supersedes but does not overwrite the primary or cash-wedge sections above it.
+- **Every addendum must cite its originating signal** — the call notes path, research file, email thread, or Shelf report that triggered the update. Addenda without provenance are unauditable six months later when memory has faded.
+- **Why append-only.** Red-teaming a decision months later requires seeing what the strategist and founder believed at the time it was made. An edit-in-place strategy loses that signal. Append-only is how the artifact both stays current *and* stays honest about its evolution.
+
+Trivial fixes (typos, broken links, formatting) can be edited in place without ceremony. The append-only rule protects claims and reasoning, not punctuation.
+
 ---
 
 ## The wedge-product concept file
@@ -115,6 +126,7 @@ When both artifacts exist and have passed their red-team passes:
   ```
 
 - Update the decision log at `decisions/decision-log.md` with an entry summarizing the recommendation, the key factors, and the kill conditions.
+- Populate the `### Active Hypotheses` block in `MEMORY.md` with the beachhead's reversal conditions (as hypotheses) plus the wedge's load-bearing price, channel, and competitive-moat assumptions. Each starts at confidence `untested`. Mirror the full-form versions (with reasoning and expected evidence) into `intake/active-hypotheses.md`.
 
 ## Handoff to the founder
 

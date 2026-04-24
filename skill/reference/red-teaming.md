@@ -96,6 +96,26 @@ Anchor every claim to one of three sources:
 
 If a challenge doesn't have an anchor, do not include it.
 
+## Principles for signal-driven passes
+
+When a red-team pass is evaluating a *signal* (a discovery-call report, a lost-deal note, a pricing response, a competitor move) rather than a pure analytical artifact, four additional framings apply. These are lenses the pass should run each critique through before accepting or rejecting the signal's implications.
+
+### Weak signal vs. strong signal
+
+Absence of signal from a non-buyer is weak evidence, not disconfirmation. A technician who does not volunteer dollar cost on an owner-facing pain is not a kill for the pain thesis — they are not the buyer. A buyer-ICP contact who does not show enthusiasm *is* meaningful, because they are who the wedge is aimed at. Tag every signal-based critique explicitly with *who said it*, *are they the buyer*, and *is absence of a response meaningful here*. If you cannot answer all three, the critique is under-specified and should be flagged as such rather than acted on.
+
+### Deal-level risk vs. beachhead-level reversal
+
+A risk surfaced by a specific prospect is a deal risk by default, not a beachhead kill. A franchise-HQ-vendor-gate that blocks one prospect is a friction for that specific deal; it is only a beachhead reversal if the same pattern appears across three or more prospects from the same ICP. Do not update the "What would reverse this recommendation" section or mark hypotheses `disconfirmed` on a single data point. The countermove to a one-off is to note the risk in `## Post-ship addenda` on the relevant strategy artifact and keep watching.
+
+### Founder-enthusiasm pressure check
+
+When a customer surfaces pain *outside* the named wedge — the HVAC customer who is enthusiastic about operator-AI when the wedge is after-hours voice — the default is **park + defer**, not **widen the wedge**. Founder-enthusiasm-driven scope creep is a named failure mode of this skill; the countermove is a checkpoint in `intake/active-hypotheses.md` or a future-dated project fact ("Month 6: reconsider operator-AI adjacency at this specific customer"), not a new SKU in the current wedge-product concept. If the founder is visibly excited by the out-of-wedge signal, name the pattern in the red-team pass explicitly: the emotional pull is the warning sign.
+
+### Hard re-lock deadlines on provisional states
+
+Any "discovery-mode caveat," "pending validation," "hold for research," or "provisional wedge" note on a strategy artifact must carry an explicit re-lock clock measured in **hours-to-days**, not weeks. Open-ended provisional states become permanent drift — the strategy softens imperceptibly until nothing is load-bearing. If the red-team pass is accepting a "hold for more signal" recommendation, the pass itself must name the deadline ("re-lock within 48 hours of the Anthony call") and the named event that closes the hold. If neither the deadline nor the triggering event is namable, the hold is a concession, not a plan — revise instead.
+
 ## Red-teaming external research
 
 When the founder drops a report into `research/results/`, read the whole file first. Then:

@@ -1,6 +1,6 @@
 ---
 name: entrepreneurial-strategist
-version: 0.3.0
+version: 0.4.0
 description: Strategic thinking partner for founders choosing what to build, who to build it for, and how to bring it to market. Triggers when the user wants to evaluate a business idea, compare verticals or beachhead markets, pick what to build next, pressure-test a venture direction, run structured founder intake, score candidate segments against Aulet criteria, or produce a beachhead recommendation and wedge-product concept. Applies Aulet's Disciplined Entrepreneurship framework, holds multiple candidates in parallel, integrates real research (Perplexity MCP / external deep research / web search), and red-teams conclusions against the founder's specific context. Use when the user says things like "help me figure out what to build", "I'm considering starting a company", "pick a vertical", "evaluate this beachhead", "compare these segments", "I want to use Entrepreneurial Strategist", or "red-team this recommendation."
 ---
 
@@ -87,6 +87,7 @@ Load reference files **on demand** and only as needed. A typical turn loads `MEM
 | Initiating or consuming external research | `reference/research-integration.md` |
 | Producing the beachhead recommendation and wedge-product concept | `reference/beachhead-recommendation.md` |
 | Crossing a phase boundary (Guided mode, or equivalent break in Advisor) | `reference/phase-boundary-checklist.md` |
+| Deciding whether a fact belongs in Claude auto-memory vs. a project file | `reference/memory-routing.md` |
 | In `Complete` phase, answering an execution question | `reference/post-recommendation-advisor.md` |
 | Operating in Guided mode specifically | `reference/guided-mode.md` |
 | Operating in Advisor mode specifically | `reference/advisor-mode.md` |
@@ -103,6 +104,7 @@ Before declaring any artifact "done" (a completed vertical analysis, a finalized
 - Track files touched during the session; roll them into the end-of-session log entry. Do not append mid-session entries to the Session Log — it is one entry per session, composed at the end (or next natural pause if the session ends mid-turn). During the session, update the structured `Active Project State` section and the files themselves.
 - Never rewrite the Session Log retroactively. It is append-only.
 - Use the templates in `templates/` as starting points; fill in placeholders with real content, never ship `{{PLACEHOLDER}}` tokens.
+- Venture-specific facts (market shape, ICP details, hypothesis state, named customers) go in project files — typically `intake/project-facts.md` or `intake/active-hypotheses.md` — not in Claude auto-memory. See `reference/memory-routing.md`.
 
 ## When to automatically red-team (per MVP spec §8)
 

@@ -128,3 +128,9 @@ Do **not** update for every minor edit (typo fixes, session-log appends).
 - It does not produce a Dunford-style positioning doc — still v2.
 - It does not re-open the beachhead or wedge without evidence. The founder can always force a return to Comparison, but the skill does not initiate it unprompted.
 - It does not generate a list of "next 10 things to do." The founder owns sequencing.
+
+## v2 — Field-Signal Reconciliation (deferred)
+
+Post-Complete field-signal handling (discovery-call reports, lost deals, pricing responses, competitive signals, macro signals touching named reversal conditions) is currently handled ad-hoc via the Common Patterns above plus the append-only discipline on the recommendation and wedge files (see `reference/beachhead-recommendation.md` § "Append-only discipline") and the four signal-driven principles (see `reference/red-teaming.md` § "Principles for signal-driven passes").
+
+A proposed 8th phase — **Field-Signal Reconciliation** — with a five-file sweep, red-team re-trigger rules, and a dedicated call-prep template is drafted in the Shelf doc `ventures/voice-ai-ventures/entrepreneurial-strategist-skill-field-signal-updates.md`. It is out of MVP scope per `docs/mvp-spec.md` §2 (ongoing strategic review → v2, Pillar 6.10). Revisit when v2 begins.

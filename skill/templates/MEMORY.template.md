@@ -56,6 +56,19 @@
 - {{VERTICAL_ONELINER_2}}
 <!-- Repeat one bullet per candidate, up to 4 active + 2 backlog. Delete unused bullets; do not ship placeholder tokens. -->
 
+### Active Hypotheses
+
+<!-- Load-bearing falsifiable claims the strategy depends on. One line per hypothesis with a confidence marker.
+     Confidence markers: untested | up (strengthened) | down (softened) | confirmed | disconfirmed
+     Format: "H<N>: <claim>. Confidence: <marker> (<one-line reason + date if moved>)"
+     Example:
+       - H1: Mid-market HVAC owners feel after-hours pain sharply enough to pay $1.5k-$3k/mo. Confidence: untested.
+       - H2: ServiceTitan does not ship bundled voice AI with >=70% parity inside 12 months. Confidence: untested.
+     Populated at Recommendation phase from the beachhead's reversal conditions + wedge's price/channel/moat assumptions.
+     Full-form store (with reasoning and signal history) is intake/active-hypotheses.md; this block is the one-glance surface.
+     Do not delete disconfirmed hypotheses — mark them `disconfirmed` so the strategy's evolution stays visible.
+     Delete this comment once real hypotheses are written. -->
+
 ### Active Open Questions
 - {{OPEN_QUESTION_1}}
 - {{OPEN_QUESTION_2}}

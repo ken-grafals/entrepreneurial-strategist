@@ -25,6 +25,7 @@ See `templates/MEMORY.template.md` for the canonical skeleton.
    - **Phase substate** — free-form bullets describing mid-phase progress. Written-through after every material action (e.g., "scored urgency on `verticals/hvac.md`"; "wrote red-team pass on `comparisons/initial-comparison.md`"; "persisted `research/results/perplexity-hvac-tam-2026-04-28.md`"). This is the working buffer. If the session dies mid-phase, this block is how the next session re-hydrates.
    - **Last reliable checkpoint** — updated only at phase boundaries. States the last point at which state is known-good. Format: `<phase-just-completed> @ <YYYY-MM-DD>` + one line summarizing what's durable. The resume protocol (see `reference/guided-mode.md`) resumes from here if `Phase substate` is empty or stale.
    - **Active verticals under consideration** — one-liner + link per candidate.
+   - **Active hypotheses** — load-bearing falsifiable claims with confidence markers. Populated at Recommendation phase from the beachhead's reversal conditions + wedge's price/channel/moat assumptions. Full-form store is `intake/active-hypotheses.md`; this block is the one-glance surface.
    - **Active open questions** — not yet resolved.
 
 3. **Session in progress** (scratch) — between Active Project State and Session Log. This is the draft session-log entry, updated at every phase boundary per `reference/phase-boundary-checklist.md`. On clean session end, promote to the Session Log and clear the scratch. On session death, the scratch IS the record — the next session promotes it during the resume protocol.
@@ -69,6 +70,7 @@ See `templates/MEMORY.template.md` for the canonical skeleton.
 - **Whenever the phase changes** (intake → idea exploration → vertical analysis, etc.), update the Active Project State `Current phase` line AND `### Last reliable checkpoint`.
 - **Whenever a vertical is added, dropped, or renamed**, update the Active Verticals list.
 - **Whenever a question is resolved**, move it from Active Open Questions to the `### Session in progress` scratch with a note on the resolution.
+- **Whenever a hypothesis's confidence shifts** (new research, founder interaction, external signal), update the marker in `### Active Hypotheses` and append a one-line reason with the date. Do not delete disconfirmed hypotheses — leave them in place marked `disconfirmed` so the strategy's evolution is visible.
 
 ## When the log gets long
 
@@ -96,5 +98,6 @@ When you open a project folder:
 - Full vertical analyses. Those live in `verticals/<name>.md`.
 - The beachhead recommendation itself. That lives in `recommendations/beachhead-recommendation.md`.
 - Red-team output. That appends to the red-teamed file and logs to `decisions/red-team-log.md`.
+- Venture-specific facts beyond the one-line `### Active Hypotheses` bullets (ICP details, market observations, competitive notes). Those live in `intake/project-facts.md` or `intake/active-hypotheses.md` — and never in Claude auto-memory. See `reference/memory-routing.md`.
 
 `MEMORY.md` is the **index and context anchor**, not the content store.

@@ -111,3 +111,19 @@
 ## Red-Team Pass
 
 <!-- Appended by the automatic red-team pass on the wedge concept. Both primary and cash wedges are red-teamed separately (see skill/reference/beachhead-recommendation.md). -->
+
+## Post-ship addenda
+
+<!-- Append-only. Do NOT edit the primary or cash-wedge blocks above once shipped. New signal lands here as a dated block.
+     Each addendum must cite its originating signal (call notes path, research file, email thread, etc.).
+     If the wedge's shape changes outright, write a new dated version block here that supersedes but does not overwrite the sections above.
+     See skill/reference/beachhead-recommendation.md § "Append-only discipline".
+
+     Format:
+
+### YYYY-MM-DD — <Pricing | Channel | Scope | Form-factor | Cash-wedge | ...> update
+- **Signal source:** <path or link to the call notes, research file, email, etc.>
+- **What moved:** <which claim(s) in the body above this addendum is affected — price range, primary channel, scope fence, form factor, cash-wedge sequencing>
+- **Hypothesis impact:** <which H<N> in MEMORY.md / intake/active-hypotheses.md shifted, and in which direction>
+- **Response:** <noted / awaiting more signal / decision-log entry at decisions/decision-log.md / new version block below>
+-->
