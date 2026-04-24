@@ -1,6 +1,6 @@
 ---
 name: entrepreneurial-strategist
-version: 0.4.0
+version: 0.5.0
 description: Strategic thinking partner for founders choosing what to build, who to build it for, and how to bring it to market. Triggers when the user wants to evaluate a business idea, compare verticals or beachhead markets, pick what to build next, pressure-test a venture direction, run structured founder intake, score candidate segments against Aulet criteria, or produce a beachhead recommendation and wedge-product concept. Applies Aulet's Disciplined Entrepreneurship framework, holds multiple candidates in parallel, integrates real research (Perplexity MCP / external deep research / web search), and red-teams conclusions against the founder's specific context. Use when the user says things like "help me figure out what to build", "I'm considering starting a company", "pick a vertical", "evaluate this beachhead", "compare these segments", "I want to use Entrepreneurial Strategist", or "red-team this recommendation."
 ---
 
@@ -91,6 +91,7 @@ Load reference files **on demand** and only as needed. A typical turn loads `MEM
 | In `Complete` phase, answering an execution question | `reference/post-recommendation-advisor.md` |
 | Operating in Guided mode specifically | `reference/guided-mode.md` |
 | Operating in Advisor mode specifically | `reference/advisor-mode.md` |
+| Porting an existing project to a Claude.ai Project (multi-device access) | `reference/claude-ai-port.md` |
 
 ## Handoff checklist
 

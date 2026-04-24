@@ -28,6 +28,7 @@ A well-behaved turn loads `MEMORY.md` (from the founder's project, if there is o
 | `reference/research-integration.md` | The three research paths and how to choose between them. |
 | `reference/guided-mode.md` | The canonical 7-step flow, with permission for the founder to skip/revisit. |
 | `reference/advisor-mode.md` | Open-ended interaction patterns; when to write files anyway. |
+| `reference/claude-ai-port.md` | Replicating the skill as a Claude.ai Project: three-layer substitution (instructions / knowledge / Shelf), the seven gaps vs. Claude Code, six-step setup flow, `claude-ai-project-agent/` directory spec, instruction-authoring size budget + fallback. |
 
 ## Invariants
 
